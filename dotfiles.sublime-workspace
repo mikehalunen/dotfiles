@@ -1,0 +1,331 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "home/.zshrc.sh",
+			"settings":
+			{
+				"buffer_size": 9884,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "#\n# Initializes Prezto.\n#\n# Authors:\n#   Sorin Ionescu <sorin.ionescu@gmail.com>\n\n# Set case-sensitivity for completion, history lookup, etc.\nzstyle ':prezto:*:*' case-sensitive 'no'\n\n# Color output (auto set to 'no' on dumb terminals).\nzstyle ':prezto:*:*' color 'yes'\n\n#\n# Sets directory options and defines directory aliases.\n#\n# Authors:\n#   James Cox <james@imaj.es>\n#   Sorin Ionescu <sorin.ionescu@gmail.com>\n#\n\n#\n# Options\n#\n\nsetopt AUTO_CD              # Auto changes to a directory without typing cd.\nsetopt AUTO_PUSHD           # Push the old directory onto the stack on cd.\nsetopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.\nsetopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.\nsetopt PUSHD_TO_HOME        # Push to home directory when no argument is given.\nsetopt CDABLE_VARS          # Change directory to a path stored in a variable.\nsetopt AUTO_NAME_DIRS       # Auto add variable-stored paths to ~ list.\nsetopt MULTIOS              # Write to multiple descriptors.\nsetopt EXTENDED_GLOB        # Use extended globbing syntax.\nunsetopt CLOBBER            # Do not overwrite existing files with > and >>.\n                            # Use >! and >>! to bypass.\n\n#\n# Aliases\n#\n\nalias d='dirs -v'\nfor index ({1..9}) alias \"$index\"=\"cd +${index}\"; unset index\n\n#\n# Sets general shell options and defines environment variables.\n#\n# Authors:\n#   Sorin Ionescu <sorin.ionescu@gmail.com>\n#\n\n#\n# Smart URLs\n#\n\nautoload -Uz url-quote-magic\nzle -N self-insert url-quote-magic\n\n#\n# General\n#\n\nsetopt BRACE_CCL          # Allow brace character class list expansion.\nsetopt COMBINING_CHARS    # Combine zero-length punctuation characters (accents)\n                          # with the base character.\nsetopt RC_QUOTES          # Allow 'Henry''s Garage' instead of 'Henry'\\''s Garage'.\nunsetopt MAIL_WARNING     # Don't print a warning message if a mail file has been accessed.\n\n#\n# Jobs\n#\n\nsetopt LONG_LIST_JOBS     # List jobs in the long format by default.\nsetopt AUTO_RESUME        # Attempt to resume existing job before creating a new process.\nsetopt NOTIFY             # Report status of background jobs immediately.\nunsetopt BG_NICE          # Don't run all background jobs at a lower priority.\nunsetopt HUP              # Don't kill jobs on shell exit.\nunsetopt CHECK_JOBS       # Don't report on jobs when shell exit.\n\n#\n# Grep\n#\n\nif zstyle -t ':prezto:environment:grep' color; then\n  export GREP_COLOR='37;45'\n  export GREP_OPTIONS='--color=auto'\nfi\n\n#\n# Termcap\n#\n\nif zstyle -t ':prezto:environment:termcap' color; then\n  export LESS_TERMCAP_mb=$'\\E[01;31m'      # Begins blinking.\n  export LESS_TERMCAP_md=$'\\E[01;31m'      # Begins bold.\n  export LESS_TERMCAP_me=$'\\E[0m'          # Ends mode.\n  export LESS_TERMCAP_se=$'\\E[0m'          # Ends standout-mode.\n  export LESS_TERMCAP_so=$'\\E[00;47;30m'   # Begins standout-mode.\n  export LESS_TERMCAP_ue=$'\\E[0m'          # Ends underline.\n  export LESS_TERMCAP_us=$'\\E[01;32m'      # Begins underline.\nfi\n\n\n\n\n#\n# Sets history options and defines history aliases.\n#\n# Authors:\n#   Robby Russell <robby@planetargon.com>\n#   Sorin Ionescu <sorin.ionescu@gmail.com>\n#\n\n#\n# Variables\n#\n\nHISTFILE=\"${ZDOTDIR:-$HOME}/.zhistory\"       # The path to the history file.\nHISTSIZE=10000                   # The maximum number of events to save in the internal history.\nSAVEHIST=10000                   # The maximum number of events to save in the history file.\n\n#\n# Options\n#\n\nsetopt BANG_HIST                 # Treat the '!' character specially during expansion.\nsetopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.\nsetopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.\nsetopt SHARE_HISTORY             # Share history between all sessions.\nsetopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.\nsetopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.\nsetopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.\nsetopt HIST_FIND_NO_DUPS         # Do not display a previously found event.\nsetopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.\nsetopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.\nsetopt HIST_VERIFY               # Do not execute immediately upon history expansion.\nsetopt HIST_BEEP                 # Beep when accessing non-existent history.\n\n#\n# Aliases\n#\n\n# Lists the ten most used commands.\nalias history-stat=\"history 0 | awk '{print \\$2}' | sort | uniq -c | sort -n -r | head\"\n\n\n#\n# Provides for easier use of 256 colors and effects.\n#\n# Authors:\n#   P.C. Shyamshankar <sykora@lucentbeing.com>\n#   Sorin Ionescu <sorin.ionescu@gmail.com>\n#\n\n# Return if requirements are not found.\n# if [[ \"$TERM\" == 'dumb' ]]; then\n#   return 1\n# fi\n\ntypeset -gA FX FG BG\n\nFX=(\n                                        none                         \"\\e[00m\"\n                                        normal                       \"\\e[22m\"\n  bold                      \"\\e[01m\"    no-bold                      \"\\e[22m\"\n  faint                     \"\\e[02m\"    no-faint                     \"\\e[22m\"\n  standout                  \"\\e[03m\"    no-standout                  \"\\e[23m\"\n  underline                 \"\\e[04m\"    no-underline                 \"\\e[24m\"\n  blink                     \"\\e[05m\"    no-blink                     \"\\e[25m\"\n  fast-blink                \"\\e[06m\"    no-fast-blink                \"\\e[25m\"\n  reverse                   \"\\e[07m\"    no-reverse                   \"\\e[27m\"\n  conceal                   \"\\e[08m\"    no-conceal                   \"\\e[28m\"\n  strikethrough             \"\\e[09m\"    no-strikethrough             \"\\e[29m\"\n  gothic                    \"\\e[20m\"    no-gothic                    \"\\e[22m\"\n  double-underline          \"\\e[21m\"    no-double-underline          \"\\e[22m\"\n  proportional              \"\\e[26m\"    no-proportional              \"\\e[50m\"\n  overline                  \"\\e[53m\"    no-overline                  \"\\e[55m\"\n\n                                        no-border                    \"\\e[54m\"\n  border-rectangle          \"\\e[51m\"    no-border-rectangle          \"\\e[54m\"\n  border-circle             \"\\e[52m\"    no-border-circle             \"\\e[54m\"\n\n                                        no-ideogram-marking          \"\\e[65m\"\n  underline-or-right        \"\\e[60m\"    no-underline-or-right        \"\\e[65m\"\n  double-underline-or-right \"\\e[61m\"    no-double-underline-or-right \"\\e[65m\"\n  overline-or-left          \"\\e[62m\"    no-overline-or-left          \"\\e[65m\"\n  double-overline-or-left   \"\\e[63m\"    no-double-overline-or-left   \"\\e[65m\"\n  stress                    \"\\e[64m\"    no-stress                    \"\\e[65m\"\n\n                                        font-default                 \"\\e[10m\"\n  font-first                \"\\e[11m\"    no-font-first                \"\\e[10m\"\n  font-second               \"\\e[12m\"    no-font-second               \"\\e[10m\"\n  font-third                \"\\e[13m\"    no-font-third                \"\\e[10m\"\n  font-fourth               \"\\e[14m\"    no-font-fourth               \"\\e[10m\"\n  font-fifth                \"\\e[15m\"    no-font-fifth                \"\\e[10m\"\n  font-sixth                \"\\e[16m\"    no-font-sixth                \"\\e[10m\"\n  font-seventh              \"\\e[17m\"    no-font-seventh              \"\\e[10m\"\n  font-eigth                \"\\e[18m\"    no-font-eigth                \"\\e[10m\"\n  font-ninth                \"\\e[19m\"    no-font-ninth                \"\\e[10m\"\n)\n\nFG[none]=\"$FX[none]\"\nBG[none]=\"$FX[none]\"\ncolors=(black red green yellow blue magenta cyan white)\nfor color in {0..255}; do\n  if (( $color >= 0 )) && (( $color < $#colors )); then\n    index=$(( $color + 1 ))\n    FG[$colors[$index]]=\"\\e[38;5;${color}m\"\n    BG[$colors[$index]]=\"\\e[48;5;${color}m\"\n  fi\n\n  FG[$color]=\"\\e[38;5;${color}m\"\n  BG[$color]=\"\\e[48;5;${color}m\"\ndone\nunset color{s,} index\n\n\n#\n# Sets terminal window and tab titles.\n#\n# Authors:\n#   Sorin Ionescu <sorin.ionescu@gmail.com>\n#\n\n# Return if requirements are not found.\n# if [[ \"$TERM\" == (dumb|linux|*bsd*) ]]; then\n#   return 1\n# fi\n\n# Sets the terminal or terminal multiplexer window title.\nfunction set-window-title {\n  local title_format{,ted}\n  zstyle -s ':prezto:module:terminal:window-title' format 'title_format' || title_format=\"%s\"\n  zformat -f title_formatted \"$title_format\" \"s:$argv\"\n\n  if [[ \"$TERM\" == screen* ]]; then\n    title_format=\"\\ek%s\\e\\\\\"\n  else\n    title_format=\"\\e]2;%s\\a\"\n  fi\n\n  printf \"$title_format\" \"${(V%)title_formatted}\"\n}\n\n# Sets the terminal tab title.\nfunction set-tab-title {\n  local title_format{,ted}\n  zstyle -s ':prezto:module:terminal:tab-title' format 'title_format' || title_format=\"%s\"\n  zformat -f title_formatted \"$title_format\" \"s:$argv\"\n\n  printf \"\\e]1;%s\\a\" ${(V%)title_formatted}\n}\n\n# Sets the tab and window titles with a given command.\nfunction _terminal-set-titles-with-command {\n  emulate -L zsh\n  setopt EXTENDED_GLOB\n\n  # Get the command name that is under job control.\n  if [[ \"${2[(w)1]}\" == (fg|%*)(\\;|) ]]; then\n    # Get the job name, and, if missing, set it to the default %+.\n    local job_name=\"${${2[(wr)%*(\\;|)]}:-%+}\"\n\n    # Make a local copy for use in the subshell.\n    local -A jobtexts_from_parent_shell\n    jobtexts_from_parent_shell=(${(kv)jobtexts})\n\n    jobs \"$job_name\" 2>/dev/null > >(\n      read index discarded\n      # The index is already surrounded by brackets: [1].\n      _terminal-set-titles-with-command \"${(e):-\\$jobtexts_from_parent_shell$index}\"\n    )\n  else\n    # Set the command name, or in the case of sudo or ssh, the next command.\n    local cmd=\"${${2[(wr)^(*=*|sudo|ssh|-*)]}:t}\"\n    local truncated_cmd=\"${cmd/(#m)?(#c15,)/${MATCH[1,12]}...}\"\n    unset MATCH\n\n    set-window-title \"$cmd\"\n    set-tab-title \"$truncated_cmd\"\n  fi\n}\n\n# Sets the tab and window titles with a given path.\nfunction _terminal-set-titles-with-path {\n  emulate -L zsh\n  setopt EXTENDED_GLOB\n\n  local absolute_path=\"${${1:a}:-$PWD}\"\n  local abbreviated_path=\"${absolute_path/#$HOME/~}\"\n  local truncated_path=\"${abbreviated_path/(#m)?(#c15,)/...${MATCH[-12,-1]}}\"\n  unset MATCH\n\n  set-window-title \"$abbreviated_path\"\n  set-tab-title \"$truncated_path\"\n}\n\n# Sets the Terminal.app proxy icon.\nfunction _terminal-set-terminal-app-proxy-icon {\n  printf '\\e]7;%s\\a' \"file://$HOST${${1:-$PWD}// /%20}\"\n}\n\n# Do not override precmd/preexec; append to the hook array.\nautoload -Uz add-zsh-hook\n\n# Set up the Apple Terminal.\nfunction term() {\n  if [[ \"$TERM_PROGRAM\" == 'Apple_Terminal' ]] \\\n    && ( ! [[ -n \"$STY\" || -n \"$TMUX\" || -n \"$DVTM\" ]] )\n  then\n    # Sets the Terminal.app current working directory before the prompt is\n    # displayed.\n    add-zsh-hook precmd _terminal-set-terminal-app-proxy-icon\n\n    # Unsets the Terminal.app current working directory when a terminal\n    # multiplexer or remote connection is started since it can no longer be\n    # updated, and it becomes confusing when the directory displayed in the title\n    # bar is no longer synchronized with real current working directory.\n    function _terminal-unset-terminal-app-proxy-icon {\n      if [[ \"${2[(w)1]:t}\" == (screen|tmux|dvtm|ssh|mosh) ]]; then\n        _terminal-set-terminal-app-proxy-icon ' '\n      fi\n    }\n    add-zsh-hook preexec _terminal-unset-terminal-app-proxy-icon\n\n    # Do not set the tab and window titles in Terminal.app since it sets the tab\n    # title to the currently running process by default and the current working\n    # directory is set separately.\n    return\n  fi\n}\n\nterm\n\n# Set up non-Apple terminals.\n# if zstyle -t ':prezto:module:terminal' auto-title \\\n#   && ( ! [[ -n \"$STY\" || -n \"$TMUX\" ]] )\n# then\n#   # Sets the tab and window titles before the prompt is displayed.\n#   add-zsh-hook precmd _terminal-set-titles-with-path\n\n#   # Sets the tab and window titles before command execution.\n#   add-zsh-hook preexec _terminal-set-titles-with-command\n# fi\n\n\n#\n# Defines general aliases and functions.\n#\n# Authors:\n#   Robby Russell <robby@planetargon.com>\n#   Suraj N. Kurapati <sunaku@gmail.com>\n#   Sorin Ionescu <sorin.ionescu@gmail.com>\n#\n\n# Correct commands.\nsetopt CORRECT\n\n#\n# Aliases\n#\n\n# Disable correction.\nalias ack='nocorrect ack'\nalias cd='nocorrect cd'\nalias cp='nocorrect cp'\nalias ebuild='nocorrect ebuild'\nalias gcc='nocorrect gcc'\nalias gist='nocorrect gist'\nalias grep='nocorrect grep'\nalias heroku='nocorrect heroku'\nalias ln='nocorrect ln'\nalias man='nocorrect man'\nalias mkdir='nocorrect mkdir'\nalias mv='nocorrect mv'\nalias mysql='nocorrect mysql'\nalias rm='nocorrect rm'\n\n# Disable globbing.\nalias bower='noglob bower'\nalias fc='noglob fc'\nalias find='noglob find'\nalias ftp='noglob ftp'\nalias history='noglob history'\nalias locate='noglob locate'\nalias rake='noglob rake'\nalias rsync='noglob rsync'\nalias scp='noglob scp'\nalias sftp='noglob sftp'\n\n# Define general aliases.\nalias _='sudo'\nalias b='${(z)BROWSER}'\nalias cp=\"${aliases[cp]:-cp} -i\"\nalias e='${(z)VISUAL:-${(z)EDITOR}}'\nalias ln=\"${aliases[ln]:-ln} -i\"\nalias mkdir=\"${aliases[mkdir]:-mkdir} -p\"\nalias mv=\"${aliases[mv]:-mv} -i\"\nalias p='${(z)PAGER}'\nalias po='popd'\nalias pu='pushd'\nalias rm=\"${aliases[rm]:-rm} -i\"\nalias type='type -a'\n\n# Checks if a name is a command, function, or alias.\nfunction is-callable {\n  (( $+commands[$1] )) || (( $+functions[$1] )) || (( $+aliases[$1] ))\n}\n\nif is-callable 'dircolors'; then\n  # GNU Core Utilities\n  alias ls='ls --group-directories-first'\n\n  if zstyle -t ':prezto:module:utility:ls' color; then\n    if [[ -s \"$HOME/.dir_colors\" ]]; then\n      eval \"$(dircolors \"$HOME/.dir_colors\")\"\n    else\n      eval \"$(dircolors)\"\n    fi\n\n    alias ls=\"$aliases[ls] --color=auto\"\n  else\n    alias ls=\"$aliases[ls] -F\"\n  fi\nelse\n  # BSD Core Utilities\n  if zstyle -t ':prezto:module:utility:ls' color; then\n    # Define colors for BSD ls.\n    export LSCOLORS='exfxcxdxbxGxDxabagacad'\n\n    # Define colors for the completion system.\n    export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'\n\n    alias ls='ls -G'\n  else\n    alias ls='ls -F'\n  fi\nfi\n\nalias l='ls -1A'         # Lists in one column, hidden files.\nalias ll='ls -lh'        # Lists human readable sizes.\nalias lr='ll -R'         # Lists human readable sizes, recursively.\nalias la='ll -A'         # Lists human readable sizes, hidden files.\nalias lm='la | \"$PAGER\"' # Lists human readable sizes, hidden files through pager.\nalias lx='ll -XB'        # Lists sorted by extension (GNU only).\nalias lk='ll -Sr'        # Lists sorted by size, largest last.\nalias lt='ll -tr'        # Lists sorted by date, most recent last.\nalias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.\nalias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.\nalias sl='ls'            # I often screw this up.\n\n# Mac OS X Everywhere\nif [[ \"$OSTYPE\" == darwin* ]]; then\n  alias o='open'\nelif [[ \"$OSTYPE\" == cygwin* ]]; then\n  alias o='cygstart'\n  alias pbcopy='tee > /dev/clipboard'\n  alias pbpaste='cat /dev/clipboard'\nelse\n  alias o='xdg-open'\n\n  if (( $+commands[xclip] )); then\n    alias pbcopy='xclip -selection clipboard -in'\n    alias pbpaste='xclip -selection clipboard -out'\n  elif (( $+commands[xsel] )); then\n    alias pbcopy='xsel --clipboard --input'\n    alias pbpaste='xsel --clipboard --output'\n  fi\nfi\n\nalias pbc='pbcopy'\nalias pbp='pbpaste'\n\n# File Download\nif (( $+commands[curl] )); then\n  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'\nelif (( $+commands[wget] )); then\n  alias get='wget --continue --progress=bar --timestamping'\nfi\n\n# Resource Usage\nalias df='df -kh'\nalias du='du -kh'\n\nif (( $+commands[htop] )); then\n  alias top=htop\nelse\n  alias topc='top -o cpu'\n  alias topm='top -o vsize'\nfi\n\n# Miscellaneous\n\n# Serves a directory via HTTP.\nalias http-serve='python -m SimpleHTTPServer'\n\n#\n# Functions\n#\n\n# Makes a directory and changes to it.\nfunction mkdcd {\n  [[ -n \"$1\" ]] && mkdir -p \"$1\" && builtin cd \"$1\"\n}\n\n# Changes to a directory and lists its contents.\nfunction cdls {\n  builtin cd \"$argv[-1]\" && ls \"${(@)argv[1,-2]}\"\n}\n\n# Finds files and executes a command on them.\nfunction find-exec {\n  find . -type f -iname \"*${1:-}*\" -exec \"${2:-file}\" '{}' \\;\n}\n\n# Displays user owned processes status.\nfunction psu {\n  ps -U \"${1:-$USER}\" -o 'pid,%cpu,%mem,command' \"${(@)argv[2,-1]}\"\n}\n\n\nfunction diff {\n  git --no-pager diff --color=auto --no-ext-diff --no-index \"$@\"\n}\n",
+			"file": "terminal/startup.sh",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 16558,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "home/.zlogin.sh",
+			"settings":
+			{
+				"buffer_size": 641,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 398.0,
+		"selected_items":
+		[
+		],
+		"width": 398.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/mhalunen/Developer/dotfiles",
+		"/Users/mhalunen/Developer/dotfiles/home",
+		"/Users/mhalunen/Developer/dotfiles/terminal"
+	],
+	"file_history":
+	[
+		"/Users/mhalunen/setup.log",
+		"/Users/mhalunen/Developer/dotfiles/terminal/highlight/zsh-syntax-highlighting.plugin.zsh",
+		"/Users/mhalunen/Developer/dotfiles/terminal/highlight/zsh-syntax-highlighting.zsh",
+		"/Users/mhalunen/Developer/dotfiles/home/.zshrc.sh",
+		"/Users/mhalunen/Developer/dotfiles/home/.gitignore",
+		"/Users/mhalunen/Developer/dotfiles/home/.zlogin.sh",
+		"/Users/mhalunen/Developer/dotfiles/terminal/startup.sh",
+		"/Users/mhalunen/Developer/dotfiles/setup-custom.sh",
+		"/Users/mhalunen/Developer/dotfiles/etc/osx.sh",
+		"/Users/mhalunen/Developer/dotfiles/setup-terminal.sh",
+		"/Users/mhalunen/Developer/dotfiles/git-extras/git-summary.sh",
+		"/Users/mhalunen/Developer/dotfiles/README.md",
+		"/Users/mhalunen/Developer/dotfiles/setup-core.sh",
+		"/Users/mhalunen/Developer/dotfiles/sublime/Packages/User/Preferences.sublime-settings",
+		"/Users/mhalunen/Developer/dotfiles/setup-sublime.sh",
+		"/Users/mhalunen/Developer/dotfiles/home/.bashrc",
+		"/Users/mhalunen/Developer/dotfiles/home/.bash_profile",
+		"/Users/mhalunen/Developer/dotfiles/home/.gitconfig",
+		"/Users/mhalunen/Developer/dotfiles/home/aliases",
+		"/Users/mhalunen/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/mhalunen/Dropbox/sublime/Packages/User/Preferences.sublime-settings",
+		"/Users/mhalunen/Developer/dotfiles/symlink-dotfiles.sh",
+		"/Users/mhalunen/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/mhalunen/Work/clients/flag/promo-sbmpp-community/app/index.html",
+		"/Users/mhalunen/Dropbox/dotfiles-master/home/.gitconfig",
+		"/Users/mhalunen/Dropbox/dotfiles-master/README.md",
+		"/Users/mhalunen/Dropbox/dotfiles-master/install.sh",
+		"/Users/mhalunen/Dropbox/dotfiles-master/symlink-dotfiles.sh",
+		"/Users/mhalunen/Dropbox/dotfiles-master/git-extras/git-setup.sh",
+		"/Users/mhalunen/Dropbox/dotfiles-master/etc/config.fish",
+		"/Users/mhalunen/Dropbox/dotfiles-master/git-extras/git-cleanup.rb",
+		"/Users/mhalunen/Downloads/setup.sh"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"subl",
+			"sub",
+			"rm",
+			"fancy_echo",
+			"git-summary",
+			"osx-text-substitutions",
+			"gitignore",
+			"dev",
+			"gitignore",
+			"paulmillr"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"echo"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "home/.zshrc.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9884,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2843,
+								2843
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 591.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "terminal/startup.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16558,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								270,
+								270
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6569.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "home/.zlogin.sh",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 641,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "dotfiles.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"zsh",
+				"home/.zshrc.sh"
+			],
+			[
+				"sym",
+				"symlink-dotfiles.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 289.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
