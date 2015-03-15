@@ -137,7 +137,7 @@ alias gup='git pull origin && git push origin'
 alias ghu='git pull hy master'
 alias ghp='git push hy master'
 
-alias gs='git status --short'
+alias gs='git status'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gdisc='git discard'

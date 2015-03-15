@@ -1,7 +1,6 @@
 {
-	"theme": "Numix Dark.sublime-theme",
-	"numix_folder_icons": true,
 	"bold_folder_labels": true,
+	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"file_exclude_patterns":
 	[
@@ -28,19 +27,18 @@
 	],
 	"font_face": "Source Code Pro",
 	"font_size": 12,
-	"highlight_line": false,
+	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
+	"numix_folder_icons": true,
 	"save_on_focus_lost": false,
 	"side_bar_width": 210,
 	"tab_size": 2,
-
+	"theme": "Numix Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
-	"word_wrap": true,
-	"highlight_line": true
-
+	"word_wrap": true
 }
