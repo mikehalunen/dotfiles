@@ -93,6 +93,11 @@ brew update
   brew install brew-cask
   brew cask install suspicious-package quicklook-json qlmarkdown qlstephen qlcolorcode
 
+  brew tap caskroom/versions
+  brew cask install sublime-text3
+
+  brew cask install iterm2
+
 # brew_install_or_upgrade 'git'
 
 echo "Installing Node"

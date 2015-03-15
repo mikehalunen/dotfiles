@@ -3,6 +3,7 @@
 # A simple script for setting up OSX dev environment.
 
 dev="$HOME/Developer/dotfiles"
+
 pushd .
 # mkdir -p $dev
 cd $dev

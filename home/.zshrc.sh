@@ -128,7 +128,8 @@ fi
 
 # Git short-cuts.
 alias g='git'
-alias ga='git add'
+alias ga='git add --all'
+alias gc='git commit -m'
 alias gr='git rm'
 
 alias gf='git fetch origin'
