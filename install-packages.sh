@@ -76,20 +76,6 @@ fi
 echo "Updating Homebrew formulas ..."
 brew update
 
-
-# http://github.com/sindresorhus/quick-look-plugins
-  echo 'Installing Quick Look plugins...'
-  brew tap phinze/homebrew-cask
-  brew install brew-cask
-  brew cask install suspicious-package quicklook-json qlmarkdown qlstephen qlcolorcode
-
-  brew tap caskroom/versions
-  brew cask install sublime-text3
-
-  brew cask install iterm2
-
-# brew_install_or_upgrade 'git'
-
 echo "Installing Node"
 brew_install_or_upgrade 'node'
 
