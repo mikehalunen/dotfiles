@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# This is a script to set up an OS X laptop for web development.
-# It can be run multiple times on the same machine safely. It
-# installs, upgrades, or skips packages based on what is already
-# installed on the machine.
-
 # This script installs the following packages
 
 # - Homebrew for managing operating system libraries
