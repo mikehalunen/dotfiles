@@ -5,16 +5,11 @@
 # installs, upgrades, or skips packages based on what is already
 # installed on the machine.
 
-# This script installs the following:
+# This script installs the following packages
 
 # - Homebrew for managing operating system libraries
 # - Node.js and NPM, for running apps and installing JavaScript packages
 # - Yo, Bower and Grunt for working on Starterkit-based projects
-
-# INSTALLATION INSTRUCTIONDS
-# 1. Download the script to your home directory
-# 2. make it executable: chmod 755 setup.sh
-# 3. execute it: ./setup.sh
 
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
@@ -112,6 +107,6 @@ npm install -g bower
 echo "Installing Grunt"
 npm install -g grunt-cli
 
-if [ -f "$HOME/.laptop.local" ]; then
-  . "$HOME/.laptop.local"
+if [ -f "$HOME/.brewinstall.local" ]; then
+  . "$HOME/.brewinstall.local"
 fi

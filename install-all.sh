@@ -12,7 +12,7 @@ echo 'Tweaking OS X...'
   source 'etc/osx.sh'
 
 echo 'Installing Brew and packages...'
-  source 'brew-installs.sh'
+  source 'install-packages.sh'
 
 echo 'Symlinking config files...'
   source 'symlink-dotfiles.sh'

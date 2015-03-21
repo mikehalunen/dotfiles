@@ -8,6 +8,7 @@ TODO
 * Load via curl, not git
 * create directory, if directory doesn't exist
 * would be nice if we could install iterm automatically, same with sublime
+* can i remove the sublime packages? And just let them be installed via the settings file?
 
 
 

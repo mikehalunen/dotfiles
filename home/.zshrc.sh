@@ -83,6 +83,7 @@ source "$curr/terminal/completion.sh"
 source /Users/mhalunen/.iterm2_shell_integration.zsh
 
 # symlink/shortcut for opening files in sublime
+rm '/usr/local/bin/subl'
 ln -s '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' '/usr/local/bin/subl'
 
 # ==================================================================
@@ -90,10 +91,20 @@ ln -s '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' '/usr/loc
 # ==================================================================
 
 # project aliases
-alias rio='cd /Users/mhalunen/Work/clients/alitsource/rio'
+alias tmp='cc ~/tmp'
+alias rio='cc ~/Work/clients/alitsource/rio'
+alias handbook='cc ~/Work/projects/web-engineering-handbook'
+alias dotfiles='cc ~/Developer/dotfiles'
+alias sk='cc ~/Work/projects/generator-starterkit'
 
 # Simple clear command.
 alias cl='clear'
+
+function cc () {
+    cd "$@" && ls -l
+}
+
+#alias cd='cd $1 && ls -l'
 
 # Disable sertificate check for wget.
 alias wget='wget --no-check-certificate'
