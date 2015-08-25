@@ -95,7 +95,8 @@ alias tmp='cc ~/tmp'
 alias rio='cc ~/Work/clients/alitsource/rio'
 alias handbook='cc ~/Work/projects/web-engineering-handbook'
 alias dotfiles='cc ~/Developer/dotfiles'
-alias sk='cc ~/Work/projects/generator-starterkit'
+alias sk='cc /Users/mhalunen/Developer/generators/generator-starterkit'
+alias flag='cc ~/Work/clients/flag'
 
 # Simple clear command.
 alias cl='clear'
@@ -174,6 +175,13 @@ alias gch='git checkout'
 alias gl='git log --no-merges'
 # own git workflow in hy origin with Tower
 alias gsync='git pull origin master && git push hy master'
+
+# http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+alias gls='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'
+
+alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+
+
 
 
 # Dev short-cuts.
