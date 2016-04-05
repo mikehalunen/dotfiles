@@ -4,7 +4,7 @@
 
 # - Homebrew for managing operating system libraries
 # - Node.js and NPM, for running apps and installing JavaScript packages
-# - Yo, Bower and Grunt for working on Starterkit-based projects
+# - Yo, Bower and Grunt & Gulp for working on client projects
 
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
@@ -87,6 +87,9 @@ npm install -g bower
 
 echo "Installing Grunt"
 npm install -g grunt-cli
+
+echo "Installing Gulp"
+npm install -g gulp
 
 if [ -f "$HOME/.brewinstall.local" ]; then
   . "$HOME/.brewinstall.local"

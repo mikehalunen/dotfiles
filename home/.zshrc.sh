@@ -92,8 +92,7 @@ ln -s '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' '/usr/loc
 
 # project aliases
 alias tmp='cc ~/tmp'
-alias rio='cc ~/Work/clients/alitsource/rio'
-alias handbook='cc ~/Work/projects/web-engineering-handbook'
+alias handbook='cc ~/Work/projects/handbook'
 alias dotfiles='cc ~/Developer/dotfiles'
 alias sk='cc /Users/mhalunen/Developer/generators/generator-starterkit'
 alias flag='cc ~/Work/clients/flag'
@@ -143,6 +142,9 @@ alias g='git'
 alias ga='git add --all'
 alias gc='git commit -m'
 alias gr='git rm'
+alias gco='git checkout'
+alias gcod='git checkout development'
+alias gcom='git checkout master'
 
 alias gf='git fetch origin'
 alias gu='git pull origin'
@@ -165,6 +167,7 @@ function gca() {
 }
 
 alias gp='git push'
+alias gpdm='git push deis master'
 
 function gcp() {
   args=$@
@@ -401,3 +404,6 @@ function preview() {
   [[ -z "$item" ]] && item='.'
   open $1 -a 'Preview'
 }
+
+export NVM_DIR="/Users/mhalunen/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
