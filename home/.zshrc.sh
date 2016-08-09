@@ -201,6 +201,10 @@ alias serve='python -m SimpleHTTPServer'
 # Checks whether connection is up.
 alias net="ping ya.ru | grep -E --only-match --color=never '[0-9\.]+ ms'"
 
+alias mvnd="mvn clean install -P deploy"
+
+
+
 # Burl: better curl shortcuts (https://github.com/visionmedia/burl).
 if (( $+commands[burl] )); then
   alias GET='burl GET'
@@ -214,6 +218,11 @@ fi
 
 # Lists the ten most used commands.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
+# projects
+alias bmh="cd /Users/mhalunen/Work/clients/flag/bettermoneyhabits-aem"
+alias aemstart="cd ~/Developer/utils/adobe/cq/ && java -XX:MaxPermSize=256m -Xmx1024M -jar cq-author-p4502.jar"
+
 
 # ==================================================================
 # = Functions =
